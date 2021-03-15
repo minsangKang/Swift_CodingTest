@@ -8,10 +8,16 @@
 ### 자주쓰이는 swift 코드
 * 한줄로 변수값을 입력
 ```swift
-let datas = readLine()!.split(separator: " ").map { Int($0)! }
+let datas = readLine()!.split(separator: " ").map { Int(String($0))! }
 let A = datas[0], B = datas[1]
 ```
 * 개행없는 출력
 ```swift
 print(data, terminator: " ")
+```
+* 배열에서 index, value값 for문으로 돌리기
+```swift
+for(index, value) in arr.enumerated() {
+   print(index, value)
+}
 ```
