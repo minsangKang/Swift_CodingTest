@@ -5,7 +5,7 @@
 //  Created by Kang Minsang on 2021/03/15.
 //
 
-unc main5() {
+func main5() {
     let line = readLine()!.split(separator: " ")
     let results = line.map { Int($0)! }
     var h = results[0]
