@@ -1,4 +1,4 @@
-# swift_backjoon
+# swift_baekjoon
 * [백준 단계별로 풀어보기](https://www.acmicpc.net/step)
 
 * [swift 문법 fastcampus 강의내용 요약](https://fdee.tistory.com/category/iOS%20개발자/swift%20기초)
