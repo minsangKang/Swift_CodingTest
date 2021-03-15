@@ -21,3 +21,16 @@ for(index, value) in arr.enumerated() {
    print(index, value)
 }
 ```
+* 배열 개수 및 초기화
+```swift
+var counts = Array(repeating: 0, count: 10)
+```
+* 소수점 개수 설정
+```swift
+let formatter = NumberFormatter()
+formatter.roundingMode = .halfUp //모드선택
+formatter.minimumFractionDigits = 3
+formatter.maximumFractionDigits = 3
+let result = formatter.string(from: NSNumber(value: data))!
+print(result)
+```
