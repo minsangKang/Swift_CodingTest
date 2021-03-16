@@ -34,3 +34,7 @@ formatter.maximumFractionDigits = 3
 let result = formatter.string(from: NSNumber(value: data))!
 print(result)
 ```
+* 아스키코드값
+```swift
+let result = Int(UnicodeScalar(input)!.value)
+```
