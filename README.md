@@ -27,12 +27,13 @@ var counts = Array(repeating: 0, count: 10)
 ```
 * 소수점 개수 설정
 ```swift
-let formatter = NumberFormatter()
-formatter.roundingMode = .halfUp //모드선택
-formatter.minimumFractionDigits = 3
-formatter.maximumFractionDigits = 3
-let result = formatter.string(from: NSNumber(value: data))!
-print(result)
+let pi = 3.141592
+print(String(format: "%.2f", pi)) //3.14
+```
+* 숫자 자리수 설정
+```swift
+let num = 5
+print(String(format: "%02d", num)) //05
 ```
 * String -> 아스키코드값
 ```swift
