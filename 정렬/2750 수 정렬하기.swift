@@ -10,6 +10,7 @@ func main1() {
     let n = Int(readLine()!)!
     for _ in 1...n {
         array.append(Int(readLine()!)!)
+        array = array.sorted()
     }
     array = array.sorted()
     for i in array {
