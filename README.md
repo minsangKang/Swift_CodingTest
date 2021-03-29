@@ -71,7 +71,14 @@ String(Character(UnicodeScalar(num)!))
 var result = ""
 result += String(repeating: "\(text)\n", count: 10)
 ```
-
+* Closure를 사용한 정렬방법
+```swift
+var points: [(Int, Int)] = [(1,1), (2,3), (4,5)]
+points.sort(by: { $0.0 == $1.0 ? $0.1 < $1.1 : $0.0 < $1.0 })
+for point in points {
+    print(point.0, point.1)
+}
+```
 * 문제해결을 위한 빠른입력 코드 (맞은사람이 극히 드문 문제일 경우 사용)
 ```swift
 import Foundation
