@@ -17,9 +17,14 @@
 * 동일문자 반복출력시 String(repeating: "\(문자)\n", count: 회수) 사용하기
 
 ### 자주쓰이는 swift 코드
-* 한줄로 변수값을 입력
+* 한줄로 변수 입력 공백으로 나누기
 ```swift
 let datas = readLine()!.split(separator: " ").map { Int(String($0))! }
+let A = datas[0], B = datas[1]
+```
+* 한줄로 변수 입력 공백없이 나누기
+```swift
+let numbers = readLine()!.map { Int(String($0))! }
 let A = datas[0], B = datas[1]
 ```
 * 개행없는 출력
