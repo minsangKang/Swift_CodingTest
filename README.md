@@ -16,6 +16,10 @@
 
 * 동일문자 반복출력시 String(repeating: "\(문자)\n", count: 회수) 사용하기
 
+* 중복내용 제거는 Set 을 이용
+
+* 특정 기준을 통한 sort의 경우 Closure 또는 튜플 배열을 통한 sort가 훨씬 빠르다
+
 ### 자주쓰이는 swift 코드
 * 한줄로 변수 입력 공백으로 나누기
 ```swift
