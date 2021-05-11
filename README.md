@@ -83,6 +83,14 @@ for point in points {
     print(point.0, point.1)
 }
 ```
+* contains : 문자열 내에 특정데이터 존재여부
+```swift
+array.contains(target)
+```
+* filter : 문자열 내에서 특정조건을 만족하는 값들 반환
+```swift
+array.filter { $0 > 0 }.count //0보다 큰 값들 의 개수 반환
+```
 * 문제해결을 위한 빠른입력 코드 (맞은사람이 극히 드문 문제일 경우 사용)
 ```swift
 import Foundation
