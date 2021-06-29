@@ -91,6 +91,78 @@ array.contains(target)
 ```swift
 array.filter { $0 > 0 }.count //0보다 큰 값들 의 개수 반환
 ```
+* 배열의 sum값
+```swift
+let sum: Int = array.reduce(0, +)
+```
+* 배열의 값과 인덱스를 tupple 형식의 배열로 저장
+```swift
+var arrayTupple: [(Int, Int)] = array.enumerated().map { ($1,$0) }.sorted(by: <)
+```
+* 우선순위큐 Priority Queue 클래스 코드
+```swift
+class PriorityQueue<T> {
+    var heap: [T] = []
+    let comparing: (_ o1: T,_ o2: T) -> Bool
+    
+    init(_ comparing: @escaping (_ o1: T,_ o2: T) -> Bool) {
+        self.comparing = comparing
+    }
+    
+    func size() -> Int { heap.count }
+    
+    func isEmpty() -> Bool { heap.isEmpty }
+    
+    func clear() { heap.removeAll() }
+    
+    func peek() -> T? { heap.first }
+    
+    func push(_ value: T) {
+        heap.append(value)
+        if heap.count == 1 { return }
+        var valueIndex = heap.count - 1
+        var parentIndex = (valueIndex-1) / 2
+        while !comparing(heap[parentIndex], heap[valueIndex]) {
+            heap.swapAt(valueIndex, parentIndex)
+            valueIndex = parentIndex
+            parentIndex = (valueIndex-1) / 2
+            if valueIndex == 0 { break }
+        }
+    }
+    
+    func pop() -> T? {
+        if heap.count == 0 { return nil }
+        if heap.count == 1 { return heap.removeFirst() }
+        
+        func isChildEmpty(_ value: Int,_ left: Int,_ right: Int) -> Bool {
+            if heap.count <= left { return true }
+            if heap.count > right { return false }
+            if comparing(heap[value], heap[left]) { return true }
+            heap.swapAt(value, left)
+            return true
+        }
+        
+        heap.swapAt(0, heap.count-1)
+        let answer = heap.removeLast()
+        
+        var valueIndex = 0
+        var leftIndex = valueIndex * 2 + 1
+        var rightIndex = valueIndex * 2 + 2
+        
+        if isChildEmpty(valueIndex, leftIndex, rightIndex) { return answer }
+        
+        while !comparing(heap[valueIndex], heap[leftIndex]) || !comparing(heap[valueIndex], heap[rightIndex]) {
+            let index = comparing(heap[leftIndex], heap[rightIndex]) ? leftIndex : rightIndex
+            heap.swapAt(valueIndex, index)
+            valueIndex = index
+            leftIndex = valueIndex * 2 + 1
+            rightIndex = valueIndex * 2 + 2
+            if isChildEmpty(valueIndex, leftIndex, rightIndex) { break }
+        }
+        return answer
+    }
+}
+```
 * 문제해결을 위한 빠른입력 코드 (맞은사람이 극히 드문 문제일 경우 사용)
 ```swift
 import Foundation

@@ -96,32 +96,60 @@ class PriorityQueue<T> {
 }
 
 
+//func solution(_ food_times:[Int], _ k:Int64) -> Int {
+//    let k = Int(k)
+//    if(food_times.reduce(0, +) <= k) {
+//        return -1
+//    }
+//
+//    var foodPriorityQueue = PriorityQueue<(Int,Int)>() {
+//        return $0.0 <= $1.0
+//    }
+//    for i in 0..<food_times.count {
+//        foodPriorityQueue.push((food_times[i],i+1))
+//    }
+//
+//    var sum_value: Int = 0 //먹기 위해 사용한 시간
+//    var previous: Int = 0 //직전에 다 먹은 음식 시간
+//    var length: Int = food_times.count //남은 음식의 개수
+//
+//    // sum_value + (현재의 음식 시간 - 이전 음식 시간)*현재 음식 개수와 k 비교
+//    while(sum_value + ((foodPriorityQueue.peek()!.0 - previous)*length) <= k) {
+//        let now: Int = foodPriorityQueue.pop()!.0
+//        sum_value += (now - previous)*length
+//        length -= 1 //다 먹은 음식 제외
+//        previous = now //이전 음식 시간 재설정
+//    }
+//
+//    //남은 음식 중에서 몇 번째 음식인지 확인하여 출력
+//    let result = foodPriorityQueue.heap.sorted(by: { $0.1 < $1.1 })
+//    return result[(k - sum_value)%length].1
+//}
+
 func solution(_ food_times:[Int], _ k:Int64) -> Int {
     let k = Int(k)
-    if(food_times.reduce(0, +) <= k) {
+    if food_times.reduce(0, +) <= k {
         return -1
     }
     
-    var foodPriorityQueue = PriorityQueue<(Int,Int)>() {
+    let foodPriorityQueue = PriorityQueue<(Int,Int)>() {
         return $0.0 <= $1.0
     }
     for i in 0..<food_times.count {
         foodPriorityQueue.push((food_times[i],i+1))
     }
     
-    var sum_value: Int = 0 //먹기 위해 사용한 시간
-    var previous: Int = 0 //직전에 다 먹은 음식 시간
-    var length: Int = food_times.count //남은 음식의 개수
+    var sum_foodTime: Int = 0
+    var prev_foodTime: Int = 0
+    var currentLength: Int = food_times.count
     
-    // sum_value + (현재의 음식 시간 - 이전 음식 시간)*현재 음식 개수와 k 비교
-    while(sum_value + ((foodPriorityQueue.peek()!.0 - previous)*length) <= k) {
-        let now: Int = foodPriorityQueue.pop()!.0
-        sum_value += (now - previous)*length
-        length -= 1 //다 먹은 음식 제외
-        previous = now //이전 음식 시간 재설정
+    while(sum_foodTime + ((foodPriorityQueue.peek()!.0 - prev_foodTime)*currentLength) <= k) {
+        let popFoodTime = foodPriorityQueue.pop()!.0
+        sum_foodTime += (popFoodTime - prev_foodTime)*currentLength
+        prev_foodTime = popFoodTime
+        currentLength -= 1
     }
     
-    //남은 음식 중에서 몇 번째 음식인지 확인하여 출력
     let result = foodPriorityQueue.heap.sorted(by: { $0.1 < $1.1 })
-    return result[(k - sum_value)%length].1
+    return result[(k - sum_foodTime)%currentLength].1
 }
