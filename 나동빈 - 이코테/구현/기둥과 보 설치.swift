@@ -20,7 +20,7 @@ func isPossible(_ map: [[Int]]) -> Bool {
             return false
         }
         //보인 경우 확인 : 기둥 위, 양부분이 보
-        else if(plate == 1) {
+        else {
             if(map.contains([x, y-1, 0]) || map.contains([x+1, y-1, 0]) || (map.contains([x-1, y, 1]) && map.contains([x+1, y, 1]))) {
                 continue
             }
@@ -45,23 +45,24 @@ func solution(_ n:Int, _ build_frame:[[Int]]) -> [[Int]] {
         let tempFrame = [x,y,plate]
         //삭제하는 경우
         if(make == 0) {
-            if let i = map.firstIndex(of: tempFrame) {
-                map.remove(at: i)
+            for i in 0..<map.count {
+                if(map[i] == tempFrame) {
+                    map.remove(at: i)
+                    break
+                }
             }
             if(!isPossible(map)) {
                 map.append(tempFrame)
             }
         }
         //설치하는 경우
-        if(make == 1) {
+        else {
             map.append(tempFrame)
             if(!isPossible(map)) {
-                if let i = map.firstIndex(of: tempFrame) {
-                    map.remove(at: i)
-                }
+                map.removeLast()
             }
         }
     }
     //최종 map 상태, sort 하여 반환
-    return map.sorted(by: { $0[0] == $1[0] ? ($0[1] == $1[1] ? $0[2] < $0[2] : $0[1] < $1[1]) : $0[0] < $1[0] })
+    return map.sorted(by: { $0[0] == $1[0] ? ($0[1] == $1[1] ? $0[2] < $1[2] : $0[1] < $1[1]) : $0[0] < $1[0] })
 }
