@@ -45,6 +45,13 @@ for(index, value) in arr.enumerated() {
 ```swift
 var counts = Array(repeating: 0, count: 10)
 ```
+* 배열의 특정 인덱스 구하기, 제거하기
+```swift
+if let idx: Int = array.firstIndex(of: "value") {
+    print(idx)
+    array.remove(at: idx) //"value" 제거
+}
+```
 * 소수점 개수 설정
 ```swift
 let pi = 3.141592
@@ -57,6 +64,10 @@ print(String(format: "%02d", num)) //05
 ```
 * String -> 아스키코드값
 ```swift
+//A : 65
+//Z : 90
+//a : 97
+//z : 122
 let result = Int(UnicodeScalar(input)!.value)
 ```
 * String 각각의 아스키코드값
@@ -75,6 +86,23 @@ String(Character(UnicodeScalar(num)!))
 var result = ""
 result += String(repeating: "\(text)\n", count: 10)
 ```
+* String 대문자, 소문자 변환
+```swift
+let upper: String = before.uppercased()
+let lower: String = before.lowercased()
+```
+* String 역순
+```swift
+let reverseString: String = before.reversed()
+```
+* 10진수(Int) -> 2진수(String)
+```swift
+let binary: String = String(num, radix: 2)
+```
+* 2진수(String) -> 10진수(Int)
+```swift
+let num: Int = Int(binary, radix: 2)!
+```
 * Closure를 사용한 정렬방법
 ```swift
 var points: [(Int, Int)] = [(1,1), (2,3), (4,5)]
@@ -91,13 +119,124 @@ array.contains(target)
 ```swift
 array.filter { $0 > 0 }.count //0보다 큰 값들 의 개수 반환
 ```
-* 배열의 sum값
+* Dictionary 입력
+```swift
+dic.updateValue("value", forKey: 1)
+```
+* Dictionary 값 접근
+```swift
+dic[1] //"value"
+```
+* Dictionary 값 제거
+```swift
+dic.removeValue(forKey: 1) //"value" 제거
+```
+* Dictionary for문
+```swift
+for (key, value) in dic {
+    print(key, value)
+}
+```
+* Int 배열의 sum값
 ```swift
 let sum: Int = array.reduce(0, +)
+```
+* String 배열의 String값
+```swift
+let resultString: String = array[0...n].reduce("", +)
+//또는
+let resultString: String = array[0...n].reduce("") { $0+"\($1)" }
+//reduce 식 응용 코드
+answer.append(resultBinary.reduce("", { $0 + ($1 == 0 ? " " : "#" )}))
 ```
 * 배열의 값과 인덱스를 tupple 형식의 배열로 저장
 ```swift
 var arrayTupple: [(Int, Int)] = array.enumerated().map { ($1,$0) }.sorted(by: <)
+```
+* 최대공약수 함수
+```swift
+func gcd(_ a: Int, _ b: Int) -> Int {
+    let mod: Int = a % b
+    return 0 == mod ? min(a, b) : gcd(b, mod)
+}
+```
+* 최소공배수 함수
+```swift
+func lcm(_ a: Int, _ b: Int) -> Int {
+    return a * b / gcd(a, b)
+}
+```
+* 임시 queue, stack (삭제, 추가)
+```swift
+queue.append(data)
+n = queue.removeFirst()
+stack.append(data)
+n = stack.removeLast()
+//마지막값 확인
+n = stack.last
+```
+* Combinations 조합 코드
+```swift
+func combos<T>(elements: ArraySlice<T>, k: Int) -> [[T]] {
+    if k == 0 {
+        return [[]]
+    }
+
+    guard let first = elements.first else {
+        return []
+    }
+
+    let head = [first]
+    let subcombos = combos(elements: elements, k: k - 1)
+    var ret = subcombos.map { head + $0 }
+    ret += combos(elements: elements.dropFirst(), k: k)
+
+    return ret
+}
+
+func combos<T>(_ elements: Array<T>, _ k: Int) -> [[T]] {
+    return combos(elements: ArraySlice(elements), k: k)
+}
+```
+* Queue 큐 클래스 코드
+```swift
+public struct Queue<T> {
+    fileprivate var array = [T?]()
+    fileprivate var head = 0
+    
+    public var isEmpty: Bool {
+        return count == 0
+    }
+    
+    public var count: Int {
+        return array.count - head
+    }
+    
+    public mutating func enqueue(_ element: T) {
+        array.append(element)
+    }
+    
+    public mutating func dequeue() -> T? {
+        guard head < array.count, let element = array[head] else { return nil }
+        
+        array[head] = nil
+        head += 1
+        
+        let percentage = Double(head)/Double(array.count)
+        if (array.count > 50 || percentage > 0.25) {
+            array.removeFirst(head)
+            head = 0
+        }
+        return element
+    }
+    public var front: T? {
+        if isEmpty {
+            return nil
+        } else {
+            return array[head]
+        }
+    }
+}
 ```
 * 우선순위큐 Priority Queue 클래스 코드
 ```swift
