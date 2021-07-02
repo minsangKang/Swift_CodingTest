@@ -1,9 +1,12 @@
 # swift_baekjoon
-* [백준 단계별로 풀어보기](https://www.acmicpc.net/step)
 
 * [swift 문법 fastcampus 강의내용 요약](https://fdee.tistory.com/category/iOS%20개발자/swift%20기초)
 
+* [swift 주요 함수 참고 블로그](http://minsone.github.io/mac/ios/swift-map-filter-reduce-and-inference)
+
 * [swift 문법 참고 블로그](https://twih1203.medium.com/swift-알고리즘에-필요한-swift-basic-총정리-d86453bbeaa5)
+
+* [swift 자료구조 블로그](https://babbab2.tistory.com/84)
 
 ### 조금더 빠른코드 작성요령
 * for문에서 1...N 대신 0..<N으로 수정하기
@@ -94,6 +97,10 @@ let lower: String = before.lowercased()
 * String 역순
 ```swift
 let reverseString: String = before.reversed()
+```
+* 배열 역순
+```swift
+let reverseArray = Array(before.reversed())
 ```
 * 10진수(Int) -> 2진수(String)
 ```swift
