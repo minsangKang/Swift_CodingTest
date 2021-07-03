@@ -245,6 +245,31 @@ public struct Queue<T> {
     }
 }
 ```
+* Queue 사용예제 코드
+```swift
+queue.enqueue((0, 0))
+//미로 움직이기 시작
+while(!queue.isEmpty) {
+    let current = queue.dequeue()!
+    //4방향 이동
+    for i in 0..<4 {
+        let nR = current.0+directions[i].0
+        let nC = current.1+directions[i].1
+        if(nR < 0 || nR >= N || nC < 0 || nC >= M) {
+            continue
+        }
+        if(map[nR][nC] == 0) {
+            continue
+        }
+        //이동회수 저장
+        if(map[nR][nC] == 1) {
+            map[nR][nC] = map[current.0][current.1]+1
+            queue.enqueue((nR,nC))
+        }
+    }
+}
+print(map[N-1][M-1])
+```
 * 우선순위큐 Priority Queue 클래스 코드
 ```swift
 class PriorityQueue<T> {
