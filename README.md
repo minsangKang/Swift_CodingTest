@@ -247,6 +247,7 @@ public struct Queue<T> {
 ```
 * Queue 사용예제 코드
 ```swift
+var queue = Queue<(Int,Int)>()
 queue.enqueue((0, 0))
 //미로 움직이기 시작
 while(!queue.isEmpty) {
