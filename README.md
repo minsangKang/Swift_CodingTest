@@ -388,3 +388,13 @@ final class FileIO {
 
 let file = FileIO()
 ```
+<hr>
+
+### func hasSuffix(String) -> Bool
+- String의 마지막값과 특정값의 동일 여부
+- [hasSuffix(_:)](https://developer.apple.com/documentation/swift/string/1541149-hassuffix)
+```swift
+let text = "hello world!"
+print(text.hasSuffix("world!) // true
+print(text.hasSuffix("world")) // false
+```
